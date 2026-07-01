@@ -2,8 +2,10 @@
 
 This repository contains an experimental reproduction of selected results from the paper:
 
+```text
 Quantum-enhanced architectures for multivariate time-series forecasting
 Sandra Ranilla-Cortina, Diego A. Aranda, Jorge Ballesteros, Jesús Bonilla, Nerea Monrio & Elías F. Combarro 
+```
 
 The goal of this project is to reproduce, analyze, and extend the main experimental ideas presented in the paper using Python-based quantum computing and machine learning tools.
 
