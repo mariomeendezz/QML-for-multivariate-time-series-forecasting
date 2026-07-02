@@ -4,3 +4,4 @@ scikit-learn==1.9.0
 torch==2.12.1
 numpy==2.5.0
 pennylane_lightning==0.45.0
+tabulate==0.10.0
