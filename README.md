@@ -7,6 +7,15 @@ This repository contains an experimental reproduction of selected results from t
 The goal of this project is to reproduce, analyze, and extend the main experimental ideas presented in the paper using Python-based quantum computing and machine learning tools.
 
 
+## Repository Structure
+
+The repository is organized as follows:
+
+- `src/`: experiment notebooks and shared utility code.
+- `models_states/`: saved model states that can be loaded instead of training from scratch.
+- `results/`: generated metrics and experiment outputs.
+- `show_metrics.py`: small helper script to inspect the saved metrics.
+
 
 ## Project Requirements
 
@@ -43,6 +52,14 @@ The recommended workflow is:
 2. Install the dependencies from `requirements.txt`.
 3. Open the notebooks with Jupyter Notebook, JupyterLab, VS Code, or another compatible environment.
 4. Run each notebook cell by cell in order.
+
+The models can be trained from the notebooks or loaded from the saved states in `models_states/`.
+
+To inspect the available metrics, run:
+
+```bash
+python show_metrics.py
+```
 
 
 ## Sources
