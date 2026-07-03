@@ -143,7 +143,22 @@ def angle_encoding(
     for i in range(nqubits):
         qml.RY(np.pi * inputs[..., i], wires=i)
 
-def QVC(
+def dense_encoding(
+    nqubits: int, 
+    inputs: list[float]
+) -> None:
+    """
+    Encodes classical input data into a quantum circuit using dense encoding by
+    preparing the state |+> and applying Rz -> Ry -> Rz
+    """
+    for i in range(nqubits):
+        qml.H(wires=i)
+        base = i * 3
+        qml.RZ(np.pi * inputs[..., base], wires=i)
+        qml.RY(np.pi * inputs[..., base + 1], wires=i)
+        qml.RZ(np.pi * inputs[..., base + 2], wires=i)
+
+def VQC_strong(
     nqubits: int,
     theta: list[float],
     reps: int
