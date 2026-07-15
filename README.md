@@ -14,6 +14,7 @@ The repository is organized as follows:
 - `src/`: experiment notebooks and shared utility code.
 - `models_states/`: saved model states that can be loaded instead of training from scratch.
 - `results/`: generated metrics and experiment outputs.
+- `figures/`: saves figures of the dataset and models.
 - `show_metrics.py`: small helper script to inspect the saved metrics.
 
 
