@@ -186,6 +186,64 @@ def VQC_strong(
         # Circular connection between last and first qubit
         qml.CNOT(wires=[nqubits-1, 0])
 
+def QSANN_circuit(
+    nqubits: int,
+    angles: list[float],
+    reps: int
+) -> None:
+    """
+    Builds a variational quantum circuit.
+
+    First applies Rx and Ry rotations to all qubits.
+
+    The applies "reps" repetitions of a block consisting
+    of circular entanglement with CNOT gates followed by a Ry.
+    """
+    expected_parameters = nqubits * (reps + 2)
+    received_parameters = qml.math.shape(angles)[-1]
+
+    if received_parameters != expected_parameters:
+        raise ValueError(
+            f"Expected {expected_parameters} parameters, "
+            f"but received {received_parameters}."
+        )
+    
+    for i in range(nqubits):
+        qml.RX(angles[..., i], wires=i)
+        qml.RY(angles[..., i+nqubits], wires=i)
+
+    for rep in range(reps):
+        # Entangling block
+        for i in range(nqubits-1):
+            qml.CNOT(wires=[i, i+1])
+        
+        # Circular connection between last and first qubit
+        qml.CNOT(wires=[nqubits-1, 0])
+
+        # Rotation
+        for i in range(nqubits):
+            base = 2 * nqubits + rep * nqubits
+            qml.RY(angles[..., base+i], wires=i)
+
+
+# We use the same variational circuit for the QSANN 
+# embedding and Q,K and V projections.
+
+def QSANN_embedding(nqubits, inputs, reps):
+    QSANN_circuit(
+        nqubits=nqubits,
+        angles=inputs,
+        reps=reps
+    )
+
+def QSANN_VQC(nqubits, theta, reps):
+    QSANN_circuit(
+        nqubits=nqubits,
+        angles=theta,
+        reps=reps
+    )
+
+
 def plot_loss(
     history: dict[str, list[float]],
     title: str | None = None
