@@ -412,3 +412,14 @@ def save_result_csv(
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def count_parameters(model) -> tuple[int, int]:
+    """
+    Counts the total and trainable parameters of a model
+    """
+    total = sum(p.numel() for p in model.parameters())
+    trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    
+    return total, trainable
+
